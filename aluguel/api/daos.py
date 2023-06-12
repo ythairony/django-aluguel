@@ -16,9 +16,9 @@ class ItemDAO:
         return render(request, 'item/formItem.html')
 
     #Salva o novo item e volta para listagem de itens
-    def saveItem(nome, descricao):
-        i = Item(name=nome, 
-                 description=descricao)
+    def saveItem(request):
+        i = Item(name=request.POST['name'], 
+                 description=request.POST['description'])
         i.save()
         return redirect('/listItem')
 
