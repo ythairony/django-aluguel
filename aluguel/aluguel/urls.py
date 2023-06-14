@@ -8,11 +8,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     #urls itens
-    path('listItem/', itemview.listItem),
-    path('formItem/', itemview.formItem),
-    path('saveItem/', itemview.saveItem),
-    path('deleteItem/<int:id>', itemview.deleteItem),
-    path('detailItem/<int:id>', itemview.detailItem),
-    path('updateItem/<int:id>', itemview.updateItem),
+    path('listItem/', itemview.list_item),
+    path('formItem/', itemview.form_item),
+    path('saveItem/', itemview.save_item),
+    path('deleteItem/<int:id>', itemview.delete_item),
+    path('detailItem/<int:id>', itemview.detail_item),
+    path('updateItem/<int:id>', itemview.update_item),
 
 ]

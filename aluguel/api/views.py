@@ -9,22 +9,22 @@ def index(request):
 
 class ItemViews:
     def __init__(self):
-        self.itemDAO = ItemDAO()
+        self.item_dao = ItemDAO()
 
-    def listItem(self, request):
-        return self.itemDAO.listItem(request)
+    def list_item(self, request):
+        return self.item_dao.list_item(request)
 
-    def formItem(self, request):
-        return self.itemDAO.formItem(request)
+    def form_item(self, request):
+        return self.item_dao.form_item(request)
 
-    def saveItem(self, request):
-        return self.itemDAO.saveItem(request)
+    def save_item(self, request):
+        return self.item_dao.save_item(request)
 
-    def deleteItem(self, request, id):
-        return self.itemDAO.deleteItem(id)
+    def delete_item(self, request, id):
+        return self.item_dao.delete_item(id)
 
-    def detailItem(self, request, id):
-        return self.itemDAO.detailItem(request, id)
+    def detail_item(self, request, id):
+        return self.item_dao.detail_item(request, id)
         
-    def updateItem(self, request, id):
-        return self.itemDAO.updateItem(request, id)
+    def update_item(self, request, id):
+        return self.item_dao.update_item(request, id)
