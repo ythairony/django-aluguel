@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 
-from .models import Item
+from .models import Item, Tema
 
 
 class ItemDAO:
@@ -34,3 +34,30 @@ class ItemDAO:
         i.description = request.POST['description']
         i.save()
                
+
+
+class TemaDAO:
+    # Recuperar a lista de temas cadastrados
+    def list_tema(self):
+        tema_list = Tema.objects.all()
+        return tema_list
+    
+    def save_tema(self, nome, valor_aluguel, cor, tema):
+        tema = Tema(name=nome, rating=valor_aluguel, color=cor, theme=tema)
+        tema.save()
+
+    def delete_tema(self, id):
+        tema = Tema.objects.get(pk=id)
+        tema.delete()
+
+    def detail_tema(self, id):
+        tema = Tema.objects.get(pk=id)
+        return tema
+    
+    def update_tema(self, request, id):
+        tema = Tema.objects.get(pk=id)
+        tema.nome = request.POST['nome']
+        tema.valor_aluguel = request.POST['valor_aluguel']
+        tema.cor = request.POST['cor']
+        tema.tema = request.POST['tema']
+        tema.save()

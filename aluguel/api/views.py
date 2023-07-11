@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from .daos import ItemDAO
+from .daos import ItemDAO, TemaDAO
 
 
 # Create your views here.
@@ -38,4 +38,38 @@ class ItemViews:
         
     def update_item(self, request, id):
         self.item_dao.update_item(request, id)
-        return redirect('/listItem') 
+        return redirect('/listItem')
+
+class TemaViews:
+    def __init__(self):
+        self.tema_dao = TemaDAO()
+
+    def list_tema(self, request):
+        tema_list = TemaDAO.list_tema(request)
+        context = {'tema_list': tema_list}
+        return render(request, 'tema/listTema.html', context)
+    
+    def form_tema(self, request):
+        return render(request, 'tema/formTema.html')
+    
+    def save_tema(self, request):
+        nome=request.POST['nome']
+        valor_aluguel=request.POST['valor_aluguel']
+        cor=request.POST['cor']
+        tema=request.POST['tema']
+        self.tema_dao.save_tema(nome, valor_aluguel, cor, tema)
+
+    def delete_tema(self, request, id):
+        self.tema_dao.delete_tema(id)
+        return redirect('/listTema')
+    
+    def detail_tema(self, request, id):
+        tema = TemaDAO.detail_tema(request, id)
+        context = {'tema' : tema}
+        return render(request, 'tema/formEditTema.html', context)
+    
+    def update_tema(self, request, id):
+        self.tema_dao.update_tema(request, id)
+        return redirect('/listTema')
+
+
