@@ -42,18 +42,23 @@ class TemaDAO:
         tema_list = Tema.objects.all()
         return tema_list
     
-    def save_tema(self, nome, valor_aluguel, cor, tema):
-        tema = Tema(name=nome, rating=valor_aluguel, color=cor, theme=tema)
-        tema.save()
+    
+    def save_tema(self, nome, valor_aluguel, cor, itens):
+        tema_festa = Tema(nome=nome, valor_aluguel=valor_aluguel, cor=cor)
+        tema_festa.save()
+        tema_festa.tema.set(itens)
+
 
     def delete_tema(self, id):
         tema = Tema.objects.get(pk=id)
         tema.delete()
 
+
     def detail_tema(self, id):
         tema = Tema.objects.get(pk=id)
         return tema
     
+
     def update_tema(self, request, id):
         tema = Tema.objects.get(pk=id)
         tema.nome = request.POST['nome']

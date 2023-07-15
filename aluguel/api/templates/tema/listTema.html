@@ -1,32 +1,30 @@
 {% extends "index.html" %} 
     {% block content %}
     <p></p>
-        <h3>Lista de Itens</h3>
+        <h3>Lista de Temas</h3>
         <hr>
-        <table class="table table-striped">
-            {% if item_list %}
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Ações</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-                {% for item in item_list%}
+        <table class="table table-striped"> 
+            {% if tema_list %}
+                <thead>
                     <tr>
-                        <td>{{item.id}}</td>
-                        <td>{{item.name}}</td>
-                        <td>{{item.description}}</td>
-                        <td width='80'><a href="/deleteItem/{{item.id}}">Excluir</a></td>
-                        <td><a href="/detailItem/{{item.id}}">Editar</a></td>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Ações</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                {% for tema in tema_list%}
+                    <tr>
+                        <td>{{tema.id}}</td>
+                        <td>{{tema.nome}}</td>
+                        <td width='80'><a href="/deleteTema/{{tema.id}}">Excluir</a></td>
+                        <td><a href="/detailTema/{{tema.id}}">Editar</a></td>
                     </tr>
                 {% endfor %}
             {% else %}
-                <p>Nenhum item cadastrado!!</p>
+                <p>Nenhum tema cadastrado!!</p>
             {%endif%}
         </table>
         <hr>
-        <a class="btn btn-primary" href="/formItem">Novo Item</a>
+        <a class="btn btn-primary" href="/formTema">Novo Tema</a>
     {% endblock %}
