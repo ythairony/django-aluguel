@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 
-from .models import Item, Tema
+from .models import Item, Tema, Rent, Client
 
 
 class ItemDAO:
@@ -69,3 +69,40 @@ class TemaDAO:
         tema_festa = Tema(id=id, nome=nome, valor_aluguel=valor_aluguel, cor=cor)
         tema_festa.save()
         tema_festa.tema.set(itens)
+
+
+class ClientDAO:
+    def list_client(self):
+        client_list = Client.objects.all()
+        return client_list
+    
+    def find_client(self, cliente):
+        client_id = Client.objects.get(id=cliente)
+        return client_id
+
+
+class RentDAO:
+    def list_rent(self):
+        rent_list = Rent.objects.all()
+        return rent_list
+
+
+    def save_rent(self, date, start_hours, end_hours, client_id, tema_id):
+        tema = Tema.objects.get(id=tema_id)
+        aluguel = Rent(date=date, start_hours=start_hours, end_hours=end_hours, client=client_id, theme=tema)
+        # se ligar no tema, pode dar errado ainda
+        aluguel.save()
+
+
+    def delete_rent(self, id):
+        rent = Rent.objects.get(pk=id)
+        rent.delete()
+
+
+    def detail_rent(self, id):
+        rent = Rent.objects.get(pk=id)
+        return rent
+
+    def update_rent(self, request, id, date, start_hours, end_hours, client_id):
+        rent = Rent(id=id, date=date, start_hours=start_hours, end_hours=end_hours, client_id=client_id)
+        rent.save()

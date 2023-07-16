@@ -1,10 +1,11 @@
 
-from api.views import ItemViews, index, TemaViews
+from api.views import ItemViews, index, TemaViews, RentViews
 from django.contrib import admin
 from django.urls import path
 
 itemview = ItemViews()
 temaview = TemaViews()
+rentview = RentViews()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,5 +24,13 @@ urlpatterns = [
     path('deleteTema/<int:id>', temaview.delete_tema),
     path('detailTema/<int:id>', temaview.detail_tema),
     path('updateTema/<int:id>', temaview.update_tema),
+    #urls rent
+    path('listRent/', rentview.list_rent),
+    path('formRent/', rentview.form_rent),
+    path('saveRent/', rentview.save_rent),
+    path('deleteRent/<int:id>', rentview.delete_rent),
+    path('detailRent/<int:id>', rentview.detail_rent),
+    path('updateRent/<int:id>', rentview.update_rent),
+
 
 ]
