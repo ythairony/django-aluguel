@@ -80,7 +80,11 @@ class TemaViews:
     
     
     def update_tema(self, request, id):
-        self.tema_dao.update_tema(request, id)
+        nome = request.POST.get('name')
+        valor_aluguel = request.POST.get('price')
+        cor = request.POST.get('color')
+        itens = request.POST.getlist('item')
+        self.tema_dao.update_tema(request, id, nome, valor_aluguel, cor, itens)
         return redirect('/listTema')
 
 

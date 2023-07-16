@@ -46,7 +46,13 @@ class TemaDAO:
     def save_tema(self, nome, valor_aluguel, cor, itens):
         tema_festa = Tema(nome=nome, valor_aluguel=valor_aluguel, cor=cor)
         tema_festa.save()
-        tema_festa.tema.set(itens)
+
+        for item in itens:
+            item_id = Item.objects.get(id=item)
+            tema_festa.tema.add(item_id)
+
+        tema_festa.save()
+        # tema_festa.tema.set(itens)
 
 
     def delete_tema(self, id):
@@ -59,10 +65,7 @@ class TemaDAO:
         return tema
     
 
-    def update_tema(self, request, id):
-        tema = Tema.objects.get(pk=id)
-        tema.nome = request.POST['nome']
-        tema.valor_aluguel = request.POST['valor_aluguel']
-        tema.cor = request.POST['cor']
-        tema.tema = request.POST['tema']
-        tema.save()
+    def update_tema(self, request, id, nome, valor_aluguel, cor, itens):
+        tema_festa = Tema(id=id, nome=nome, valor_aluguel=valor_aluguel, cor=cor)
+        tema_festa.save()
+        tema_festa.tema.set(itens)

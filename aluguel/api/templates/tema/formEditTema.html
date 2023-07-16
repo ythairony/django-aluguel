@@ -1,26 +1,46 @@
 {% extends "index.html" %} 
 {% block content %}
     <div><p></p></div>
-    <h3>Atualizar Item</h3>
+    <h3>Atualizar Temas</h3>
     <hr>
-        <form action="/updateItem/{{item.id}}" method="post">
+        <form action="/updateTema/{{tema.id}}" method="post">
             {% csrf_token %}
             <div class="row mb-3">
                 <label class="col-sm-1" for="">Nome</label>
                 <div class="col-sm-11">
-                    <input type="text" size="50" name="name" value="{{item.name}}">
+                    <input type="text" size="50" name="name" value="{{tema.nome}}">
                 </div>
             </div>
+           <div class="row mb-3">
+                    <label class="col-sm-1" for="">Cor</label>
+                    <div class="col-sm-11">
+                        <input type="text" size="20" name="color" value="{{tema.cor}}">
+                    </div>    
+           </div>
             <div class="row mb-3">
-                <label class="col-sm-1" for="">Descrição</label>
+                <label class="col-sm-1" for="">Preço (R$)</label>
                 <div class="col-sm-11">
-                    <textarea  type="text" cols="53" name="description" value=""> {{item.description}}</textarea>
+                    <input type="text" size="20" name="price" value="{{tema.valor_aluguel}}">
                     
                 </div>
             </div>
             <hr>
-            <a class="btn btn-secondary btn-sm" href="/listItem">Voltar</a>
-            <input class="btn btn-primary" type="submit" value="Gravar">
+            <fieldset class="row mb-3">
+                <legend class="col-form-label col-sm-1 pt-0">Itens Tema</legend>
+                <div class="col-sm-11">
+                    {% for item in tema.tema.all %}
+                        {% if item%}  
+                            <div class="form-check">
+                                <input type="checkbox" name="item" value="{{item.id}}" id="" checked>
+                                <label for="item_name">{{item.name}}</label>
+                            </div>          
+                        {% endif%}
+                    {% endfor %}
+                </div>
+            </fieldset>
+            <hr>
+        <a class="btn btn-secondary btn-sm" href="/listTema">Voltar</a>
+        <input class="btn btn-primary" type="submit" value="Gravar">
         </form>
         
 {% endblock %}
