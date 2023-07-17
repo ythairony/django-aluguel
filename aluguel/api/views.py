@@ -136,10 +136,10 @@ class RentViews:
         end_hours = request.POST['end_hours']
 
         #começou a dar errado quando pediu o id do cliente
-        client = RentViews.detail_rent(self, request, id).client
-        client_id = ClientDAO.find_client(self, client)
+        # client = RentViews.detail_rent(self, request, id).client
+        # client_id = ClientDAO.find_client(self, client)
 
-        self.rent_dao.update_rent(request, id, date, start_hours, end_hours, client_id)
+        self.rent_dao.update_rent(request, id, date, start_hours, end_hours)
 
                 
         return redirect('/listRent')

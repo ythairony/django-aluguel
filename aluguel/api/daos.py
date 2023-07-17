@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 
-from .models import Item, Tema, Rent, Client
+from .models import Client, Item, Rent, Tema
 
 
 class ItemDAO:
@@ -103,6 +103,9 @@ class RentDAO:
         rent = Rent.objects.get(pk=id)
         return rent
 
-    def update_rent(self, request, id, date, start_hours, end_hours, client_id):
-        rent = Rent(id=id, date=date, start_hours=start_hours, end_hours=end_hours, client_id=client_id)
+    def update_rent(self, request, id, date, start_hours, end_hours):
+        rent = Rent.objects.get(id=id)
+        rent.date=date
+        rent.start_hours=start_hours
+        rent.end_hours=end_hours
         rent.save()
