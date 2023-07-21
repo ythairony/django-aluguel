@@ -8,7 +8,7 @@ class Client(models.Model):
     def __str__(self):
         return self.name
     
-
+    
 class Rent(models.Model):
     date = models.DateField(blank=False, null=False)
     start_hours = models.CharField(max_length=5, blank=False, null=False)

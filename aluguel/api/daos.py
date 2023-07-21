@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 
 from .models import Client, Item, Rent, Tema
+from .business import Util
 
 
 class ItemDAO:
@@ -87,9 +88,13 @@ class RentDAO:
         return rent_list
 
 
-    def save_rent(self, date, start_hours, end_hours, client_id, tema_id):
+    def save_rent(self, request, date, start_hours, end_hours, client_id, tema_id):
         tema = Tema.objects.get(id=tema_id)
+        tema.valor_aluguel = Util.CalcDesc(self,request)
+        print(tema.valor_aluguel)
         aluguel = Rent(date=date, start_hours=start_hours, end_hours=end_hours, client=client_id, theme=tema)
+        # desconto = Util.CalcDesc(self, request)
+
         # se ligar no tema, pode dar errado ainda
         aluguel.save()
 

@@ -114,7 +114,7 @@ class RentViews:
 
         client = ClientDAO.find_client(self, client_id)    
 
-        self.rent_dao.save_rent(date, start_hours, end_hours, client, tema_id)
+        self.rent_dao.save_rent(request, date, start_hours, end_hours, client, tema_id)
 
         return redirect('/listRent')
 
