@@ -15,6 +15,7 @@ class Rent(models.Model):
     end_hours = models.CharField(max_length=5, blank=False, null=False)
     client = models.ForeignKey('Client', on_delete=CASCADE, related_name='rents')
     theme = models.ForeignKey('Tema', on_delete=CASCADE, related_name='rents')
+    valor_aluguel = models.DecimalField("Valor do aluguel", max_digits=6, decimal_places=2, default=0)
 
     def __str__(self):
         return str(self.date) + ' ' + self.client.name + ' ' + self.theme.nome

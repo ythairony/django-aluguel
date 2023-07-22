@@ -89,10 +89,10 @@ class RentDAO:
 
 
     def save_rent(self, request, date, start_hours, end_hours, client_id, tema_id):
-        tema = Tema.objects.get(id=tema_id)
-        tema.valor_aluguel = Util.CalcDesc(self,request)
-        print(tema.valor_aluguel)
-        aluguel = Rent(date=date, start_hours=start_hours, end_hours=end_hours, client=client_id, theme=tema)
+        # tema = Tema.objects.get(id=tema_id)
+        # tema.valor_aluguel = Util().calc_desc(request)
+        # print(tema.valor_aluguel)
+        aluguel = Rent(date=date, start_hours=start_hours, end_hours=end_hours, client=client_id, theme_id=tema_id, valor_aluguel=Util().calc_desc(request))
         # desconto = Util.CalcDesc(self, request)
 
         # se ligar no tema, pode dar errado ainda

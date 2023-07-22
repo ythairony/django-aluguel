@@ -17,25 +17,28 @@ def obter_dia_da_semana(data_str):
             return nome_do_dia
         except ValueError:
             return "Formato de data inválido. Utilize o formato 'YYYY-MM-DD'."
+        
+
 
 class Util:
-    
-    
+    def __init__(self):
+        self.desc_40 = ['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira']
+        self.desc_10 = ['sexta-feira', 'sábado', 'domingo']
+        
 
-    def CalcDesc(self, request):
-        data = request.POST['date']
-        cliente_id = request.POST['select_client']
-        dia_semana = obter_dia_da_semana(data)
-        desc_40 = ['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira']
-        desc_10 = ['sexta-feira', 'sábado', 'domingo']
-        cliente = Client.objects.get(pk=cliente_id)
-        tema_escolhido = request.POST['select_theme']
-        tema = Tema.objects.get(pk=tema_escolhido)
-        if cliente:
-            rent = Rent.objects.filter(client=cliente)
-            if dia_semana in desc_40 and rent:
-                 valor_aluguel = tema.valor_aluguel * Decimal(0.6)
-            elif dia_semana in desc_10 and rent:
-                 valor_aluguel = tema.valor_aluguel * Decimal(0.9)
+
+    def calc_desc(self, request):
+        cliente_tem_aluguel = Rent.objects.filter(client_id=request.POST['select_client']).exists()
+        tema = Tema.objects.get(pk=request.POST['select_theme'])
+
+        valor_aluguel = tema.valor_aluguel
+        if cliente_tem_aluguel:
+            dia_semana = obter_dia_da_semana(request.POST['date'])
+
+            if dia_semana in self.desc_40:
+                valor_aluguel = tema.valor_aluguel * Decimal(0.6)
+            elif dia_semana in self.desc_10:
+                valor_aluguel = tema.valor_aluguel * Decimal(0.9)
+        
         
         return valor_aluguel
