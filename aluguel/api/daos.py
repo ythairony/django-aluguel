@@ -53,7 +53,6 @@ class TemaDAO:
             tema_festa.tema.add(item_id)
 
         tema_festa.save()
-        # tema_festa.tema.set(itens)
 
 
     def delete_tema(self, id):
@@ -89,13 +88,8 @@ class RentDAO:
 
 
     def save_rent(self, request, date, start_hours, end_hours, client_id, tema_id):
-        # tema = Tema.objects.get(id=tema_id)
-        # tema.valor_aluguel = Util().calc_desc(request)
-        # print(tema.valor_aluguel)
         aluguel = Rent(date=date, start_hours=start_hours, end_hours=end_hours, client=client_id, theme_id=tema_id, valor_aluguel=Util().calc_desc(request))
-        # desconto = Util.CalcDesc(self, request)
 
-        # se ligar no tema, pode dar errado ainda
         aluguel.save()
 
 
@@ -108,7 +102,7 @@ class RentDAO:
         rent = Rent.objects.get(pk=id)
         return rent
 
-    def update_rent(self, request, id, date, start_hours, end_hours):
+    def update_rent(self, id, date, start_hours, end_hours):
         rent = Rent.objects.get(id=id)
         rent.date=date
         rent.start_hours=start_hours

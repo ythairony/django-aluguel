@@ -92,20 +92,20 @@ class RentViews:
     def __init__(self):
         self.rent_dao = RentDAO()
 
-    def list_rent(self, request): #listRent
+    def list_rent(self, request):
         rent_list = RentDAO.list_rent(request)
         context = {'rent_list': rent_list}
         return render(request, 'rent/listRent.html', context) 
     
     #Redirecionador para o formulário de cadastro de aluguel
-    def form_rent(self, request): #formRent
+    def form_rent(self, request):
         client_list = ClientDAO.list_client(request)
         tema_list = TemaDAO.list_tema(request)
         context = {'client_list':client_list, 'tema_list': tema_list}
         return render(request, 'rent/formRent.html', context)
     
     #Salva o novo aluguel e volta para listagem de alugueis
-    def save_rent(self, request): #saveRent       
+    def save_rent(self, request):
         date=request.POST['date']
         start_hours = request.POST['start_hours']
         end_hours = request.POST['end_hours']
@@ -119,27 +119,23 @@ class RentViews:
         return redirect('/listRent')
 
     #Deleta um aluguel e volta para listagem de alugueis
-    def delete_rent(self, request, id): #deleteRent
+    def delete_rent(self, request, id):
         self.rent_dao.delete_rent(id)
         return redirect('/listRent')
     
     #Pega um aluguel pelo ID e enviar para o form de edição
-    def detail_rent(self, request, id): #detailRent
+    def detail_rent(self, request, id): 
         rent = RentDAO.detail_rent(request, id)
         context = {'rent': rent}
         return render(request, 'rent/formEditRent.html', context)
     
     #Atualiza um item e volta para listagem
-    def update_rent(self, request, id): #updateRent
+    def update_rent(self, request, id): 
         date=request.POST['date']
         start_hours = request.POST['start_hours']
         end_hours = request.POST['end_hours']
 
-        #começou a dar errado quando pediu o id do cliente
-        # client = RentViews.detail_rent(self, request, id).client
-        # client_id = ClientDAO.find_client(self, client)
-
-        self.rent_dao.update_rent(request, id, date, start_hours, end_hours)
+        self.rent_dao.update_rent(id, date, start_hours, end_hours)
 
                 
         return redirect('/listRent')
